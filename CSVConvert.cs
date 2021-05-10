@@ -44,9 +44,9 @@ namespace CSVFile
                 csvFile += string.IsNullOrEmpty(People[i].Company) 
                     ?";" 
                     : People[i].Company + ";";
-                csvFile += string.IsNullOrEmpty(People[i].Address)
+                csvFile += string.IsNullOrEmpty($"\"{ People[i].Address}\"")
                     ?";" 
-                    : People[i].Address + ";";
+                    : $"\"{ People[i].Address}\"" + ";";
                 csvFile += People[i].Salary + "\n";
             }
             csvFile = csvFile.Remove(csvFile.Length - 1, 1);
