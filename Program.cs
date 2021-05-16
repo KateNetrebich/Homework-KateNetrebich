@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace PracticeTask
 {
@@ -17,7 +18,12 @@ namespace PracticeTask
                 Console.WriteLine("4.DateTime Format");
                 Console.WriteLine("5.Convert string to DateTime");
                 Console.WriteLine("6.Sum");
-                Console.WriteLine("10.Exit");
+                Console.WriteLine("7.Password");
+                Console.WriteLine("8.Find text with numbers");
+                Console.WriteLine("9.Phone");
+                Console.WriteLine("10.Phone Convert");
+                Console.WriteLine("11.Convert text");
+                Console.WriteLine("12.Exit");
        
                 var action = Console.ReadLine();
                 switch(action)
@@ -40,7 +46,22 @@ namespace PracticeTask
                     case "6":
                         Count();
                         break;
+                    case "7":
+                        Password();
+                        break;
+                    case "8":
+                        FindText();
+                        break;
+                    case "9":
+                        Phone();
+                        break;
                     case "10":
+                        ConvertPhoneNumber();
+                        break;
+                    case "11":
+                        ConvertText();
+                        break;
+                    case "12":
                         return;
                 }
             }
@@ -105,7 +126,71 @@ namespace PracticeTask
             int sum = 0;
             Array.ForEach(numbersIntArray, delegate (int i) { sum += i; });
             Console.WriteLine(sum);
+        }
 
+        public static void Password()
+        {
+            Console.WriteLine("Введите пароль");
+            var password = Console.ReadLine();
+            Regex regex = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9]{6,15}$");
+            if (regex.IsMatch(password))
+            {
+                Console.WriteLine("Пароль успешно введен");
+                return;
+            }
+            Console.WriteLine("Пароль должен содержать 6 символов, минимум одну прописную букву, заглавную букву, цифру");
+        }
+
+        public static void FindText()
+        {
+            Console.WriteLine("Input text");
+            string text = Console.ReadLine();
+            Regex regex = new Regex(@"[a-zA-Z]+[\d]+");
+            if (regex.IsMatch(text))
+            {
+                foreach (var match in regex.Matches(text))
+                {
+                    Console.Write(match);
+                }
+                Console.WriteLine();
+                return;
+            }
+            Console.Write("Нет совпадений");
+        }
+
+        public static void Phone()
+        {
+            Console.WriteLine("Input phone number");
+            var phone = Console.ReadLine();
+            Regex regex = new Regex(@"\+?\d{3}-\d{2}-\d{3}-\d{2}-\d{2}");
+            if (regex.IsMatch(phone))
+            {
+                Console.WriteLine(phone);
+                return;
+            }
+            Console.WriteLine("Вееденный номер телефона не соответствует шаблону");
+        }
+
+        public static void ConvertPhoneNumber()
+        {
+            Console.WriteLine("Input phone number");
+            var phone = Console.ReadLine();
+            Regex regex = new Regex(@"\+?\d{3}-\d{2}-\d{3}-\d{2}-\d{2}");
+            if (regex.IsMatch(phone))
+            {
+                Console.WriteLine(regex.Replace(phone, "+XXX-XX-XXX-XX-XX"));
+                return;
+            }
+            Console.WriteLine("Вееденный номер телефона не соответствует шаблону");
+        }
+
+        public static void ConvertText()
+        {
+            Console.WriteLine("Input text");
+            string text = Console.ReadLine();
+            byte[] bytes = Encoding.Default.GetBytes(text);
+            text = Encoding.UTF8.GetString(bytes);
+            Console.WriteLine(text);
         }
     }
 }
