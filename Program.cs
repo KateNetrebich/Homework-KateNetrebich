@@ -8,7 +8,7 @@ namespace CSVFile
         static void Main(string[] args)
         {
             CSVConvert csvConvert = new CSVConvert(PersonList.GetListPerson());
-            string path = @"C:\Users\Kate\Desktop";
+            string path = @"D:\CSVFile";
             DirectoryInfo dirInfo = new DirectoryInfo(path);
             if (!dirInfo.Exists)
             {

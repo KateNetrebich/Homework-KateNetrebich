@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CSVFile
 {
@@ -12,42 +14,33 @@ namespace CSVFile
 
         public string Export()
         {
+            Console.WriteLine("Input properties to export");
+            string input = Console.ReadLine();
+            string[] inputDivided = input.Split(',');
             string csvFile = string.Empty;
-            var uneditedNames = typeof(Person).GetProperties();
-            string[] propertiesNames = new string[uneditedNames.Length];
+            var propertiesNames = typeof(Person).GetProperties()
+                .Select(x=>x.ToString()
+                .Split(' ')[1]).ToList();
 
-            for (int i = 0; i < uneditedNames.Length; i++)
-            {
-                propertiesNames[i] = uneditedNames[i].ToString();
-                propertiesNames[i] = propertiesNames[i].Split(' ')[1];
-            }
-            for (int i = 0; i < propertiesNames.Length; i++)
+            for (int i = 0; i < propertiesNames.Count; i++)
             {
                 csvFile += propertiesNames[i] + ";";
             }
             csvFile = csvFile.Remove(csvFile.Length - 1, 1) + '\n';
-
             for (int i = 0; i < People.Count; i++)
             {
-                csvFile += People[i].Age == 0
-                    ? ";"
-                    : People[i].Age + ";";
-                csvFile += string.IsNullOrEmpty(People[i].EyeColor)
-                    ? ";" 
-                    : People[i].EyeColor + ";";
-                csvFile += string.IsNullOrEmpty(People[i].Name) 
-                    ?";" 
-                    : People[i].Name + ";" ;
-                csvFile += string.IsNullOrEmpty(People[i].Gender) 
-                    ?";" 
-                    : People[i].Gender + ";";
-                csvFile += string.IsNullOrEmpty(People[i].Company) 
-                    ?";" 
-                    : People[i].Company + ";";
-                csvFile += string.IsNullOrEmpty($"\"{ People[i].Address}\"")
-                    ?";" 
-                    : $"\"{ People[i].Address}\"" + ";";
-                csvFile += People[i].Salary + "\n";
+                for (int n = 0; n < inputDivided.Length; n++)
+                {
+                    if (propertiesNames.Contains(inputDivided[n]))
+                    {
+                        csvFile += People[i].GetType().GetProperty(inputDivided[n]).GetValue(People[i], null) + ";";
+                    }
+                    else
+                    {
+                        csvFile += ";";
+                    }
+                }
+                csvFile = csvFile.Remove(csvFile.Length - 1, 1) + '\n';
             }
             csvFile = csvFile.Remove(csvFile.Length - 1, 1);
             return csvFile; 
