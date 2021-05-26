@@ -34,8 +34,9 @@ namespace LinqHomeworkPart2
                 Console.WriteLine("Choose action");
                 Console.WriteLine("1.All actors names");
                 Console.WriteLine("2.Actor birthday");
-                Console.WriteLine("4.Articles");
-                Console.WriteLine("5.Count");
+                Console.WriteLine("3.Articles");
+                Console.WriteLine("4.Count");
+                Console.WriteLine("5.Actors Films");
                 Console.WriteLine("6.Exit");
                 Console.WriteLine();
 
@@ -55,7 +56,7 @@ namespace LinqHomeworkPart2
                         FilmsAndArticle(data);
                         break;
                     case "5":
-                        Count(data);
+                        ActorFilms(data);
                         break;
                     case "6":
                         return;
@@ -65,89 +66,50 @@ namespace LinqHomeworkPart2
 
         public static void AllNames(List<object> data)
         {
-            var sorted = data.Where(n => n is Film).Cast<Film>().ToList();
-            foreach (var film in sorted)
-            {
-                foreach (var actor in film.Actors)
-                {
-                    Console.WriteLine(actor.Name);
-                }
-            }
+            Console.Clear();
+            var sorted = data.OfType<Film>().ToList();
+            sorted.SelectMany(x => x.Actors)
+                .Select(x => x.Name).Distinct()
+                .ToList().ForEach(x => Console.WriteLine(x));
         }
 
         public static void ActorsBirthday(List<object> data)
         {
-            var names = new List<string>();
-            var sorted = data.Where(b => b is Film).Cast<Film>().ToList();
-            foreach (var film in sorted)
-            {
-                foreach (var actor in film.Actors)
-                {
-                    if (actor.Birthdate.Month == 8)
-                    {
-                        if (!names.Contains(actor.Name))
-                        {
-                            names.Add(actor.Name);
-                        }
-
-                    }
-                }
-            }
-            foreach (var name in names)
-            {
-                Console.WriteLine(name);
-            }
+            Console.Clear();
+            var sorted = data.OfType<Film>().ToList();
+            sorted.SelectMany(x => x.Actors)
+                .Where(x => x.Birthdate.Month == 8)
+                .Select(x => x.Name).ToList()
+                .ForEach(x => Console.WriteLine(x));
         }
 
         public static void Articles(List<object> data)
         {
-            var found = data.Where(a => a is Article).Cast<Article>().GroupBy(a => a.Author)
-                .Select(group => Tuple.Create(group.Key, group.Count()));
-            foreach (var objects in found)
-            {
-                var author = objects.Item1;
-                var count = objects.Item2;
-                Console.WriteLine($"{author} - {count}");
-            }
-        }
-
-        public static void Count(List<object> data)
-        {
-            var found = data.Where(a => a is ArtObject).Cast<ArtObject>()
-                .GroupBy(a=> a.GetType())
-                .Select(byType => Tuple.Create(
-                    byType.Key,
-                    byType.GroupBy(a=>a.Author)
-                        .Select(byAuthor=>Tuple.Create(byAuthor.Key, byAuthor.Count()))));
-            foreach (var byType in found)
-            {
-                var type = byType.Item1;
-                var authorsByType = byType.Item2;
-            }
+            Console.Clear();
+            data.OfType<Article>().GroupBy(a => a.Author)
+                .Select(group => Tuple.Create(group.Key, group.Count()))
+                .ToList()
+                .ForEach(x => Console.WriteLine($"{x.Item1} - {x.Item2}"));
         }
 
         public static void FilmsAndArticle(List<object> data)
         {
-            var found = data.Where(a => a is ArtObject).Cast<ArtObject>().GroupBy(a => a.Author)
-                .Select(group => Tuple.Create(group.Key, group.Count()));
-            foreach (var byType in found)
-            {
-                var type = byType.Item1;
-                var authorsByType = byType.Item2;
-                Console.WriteLine($"{type} - {authorsByType}");
-
-            }
+            data.OfType<ArtObject>()
+                .GroupBy(a => a.Author)
+                .Select(group => Tuple.Create(group.Key, group.Count()))
+                .ToList()
+                .ForEach(x => Console.WriteLine($"{x.Item1} - {x.Item2}"));
         }
 
         public static void ActorFilms(List<object> data)
         {
-            var found = data.Where(d => d is Film).Cast<Film>().GroupBy(a=>a.Actors).Select(group => Tuple.Create(group.Key, group.GroupBy(a=>a.Name)));
-            foreach (var films in found)
-            {
-                var film = films.Item1;
-                var actor = films.Item2;
-                Console.WriteLine($"{actor}-{film}");
-            }
+            data.OfType<Film>()
+                .GroupBy(a => a.Actors)
+                .Select(group => Tuple.Create(group.Key, group.GroupBy(a => a.Name)))
+                .ToList()
+                .ForEach(x => Console.WriteLine($"{x.Item1}-{x.Item2}"));
         }
-    }
+    } 
 }
+
+
