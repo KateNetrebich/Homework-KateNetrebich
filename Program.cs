@@ -65,6 +65,7 @@ namespace LINQHomework
 
         public static void Division()
         {
+            Console.Clear();
             var number = Console.ReadLine();
             var result = number.Where(n => n >= 10 && n <= 50).Select(n => n % 3 == 0).ToString();
             Console.WriteLine(result);
@@ -72,6 +73,7 @@ namespace LINQHomework
 
         public static void PrintLINQ()
         {
+            Console.Clear();
             foreach (string linq in Enumerable.Repeat("Linq", 10).Select((l, i) => $"{i + 1}:{l}."))
             {
                 Console.WriteLine(linq);
@@ -80,22 +82,22 @@ namespace LINQHomework
 
         public static void First()
         {
+            Console.Clear();
             Console.WriteLine(string.Join(",", Enumerable.Range(10, 41)));
         }
 
         public static void WordsWithA()
         {
+            Console.Clear();
             string str = "aaa,abb,ccc,dap,trwv,twfc,aqwd";
             string[] strArray = str.Split(',');
-            str = strArray
-             .Where(n => n.Contains('a'))
-             .ToList()
-             .Aggregate((a, x) => a + "; " + x);
+            str = string.Join(',', strArray.Where(n => n.Contains('a')));
             Console.WriteLine(str);
         }
 
         public static void CountA()
         {
+            Console.Clear();
             string str = "aaa,abb,ccc,dap,trwv,twfc,aqwd";
             string[] strArray = str.Split(',');
             str = strArray
@@ -108,14 +110,17 @@ namespace LINQHomework
 
         public static void FindAbb()
         {
+            Console.Clear();
             string str = "aaa,abb,ccc,dap";
             string[] strArray = str.Split(',');
-            str = strArray.Contains("abb") ? "True" : "False";
+            str = strArray.Any(a => a.StartsWith("abb")) ? "True" : "False";
             Console.WriteLine(str);
+
         }
 
         public static void LongWord()
         {
+            Console.Clear();
             string str = "aaa,xabbx,abb,ccc,dap";
             string[] strArray = str.Split(',');
             str = strArray.OrderByDescending(s => s.Length).First();
@@ -124,6 +129,7 @@ namespace LINQHomework
 
         public static void CountStringLength()
         {
+            Console.Clear();
             string str = "aaa,xabbx,abb,ccc,dap";
             string[] strArray = str.Split(',');
             str = strArray.Average(n => n.Length).ToString();
@@ -132,6 +138,7 @@ namespace LINQHomework
 
         public static void FindShort()
         {
+            Console.Clear();
             string str = "aaa,xabbx,abb,ccc,dap,zh";
             string[] strArray = str.Split(',');
             str = new string(strArray.OrderBy(s => s.Length).First().Reverse().ToArray());
@@ -140,12 +147,12 @@ namespace LINQHomework
 
         public static void StartWithA()
         {
+            Console.Clear();
             string str = "baaa,aabbfd,aabb,aaa,xabbx,abb,ccc,dap,zh";
             string[] strArray = str.Split(',');
             str = strArray.First(n => n.StartsWith("aa"));
             str = Regex.IsMatch(str, "^aab+$") ? "True" : "False";
             Console.WriteLine(str);
         }
-
     }
 }
