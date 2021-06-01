@@ -137,53 +137,20 @@ namespace LINQTask
             var chose = Console.ReadLine();
             if(chose == "Asc")
             {
-                Console.WriteLine("Choose Name, Id, Date or Balance");
-                var input = Console.ReadLine();
-                if(input=="Name")
-                {
-                    var name = customers.OrderBy(c => c.Name).ToList();
-                    Console.WriteLine(name);
-                }
-                else if(input == "Id")
-                {
-                    var id = customers.OrderBy(c => c.Id).ToList();
-                    Console.WriteLine(id);
-                }
-                else if(input == "Date")
-                {
-                    var date = customers.OrderBy(c => c.RegistrationDate).ToList();
-                    Console.WriteLine(date);
-                }
-                else if (input == "Balance")
-                {
-                    var balance = customers.OrderBy(c => c.Balance).ToList();
-                    Console.WriteLine(balance);
-                }
+                var customer = customers.OrderBy(c => c.Id)
+                    .ThenBy(c=>c.Name)
+                    .ThenBy(c=>c.RegistrationDate)
+                    .ThenBy(c=>c.Balance).ToList();
+                Console.WriteLine(customer);
+               
             }
             else if (chose == "Desc")
             {
-                Console.WriteLine("Choose Name, Id, Date or Balance");
-                var input = Console.ReadLine();
-                if (input == "Name")
-                {
-                    var name = customers.OrderBy(c => c.Name).ToList();
-                    Console.WriteLine(name);
-                }
-                else if (input == "Id")
-                {
-                    var id = customers.OrderByDescending(c => c.Id).ToList();
-                    Console.WriteLine(id);
-                }
-                else if (input == "Date")
-                {
-                    var date = customers.OrderByDescending(c => c.RegistrationDate).ToList();
-                    Console.WriteLine(date);
-                }
-                else if (input == "Balance")
-                {
-                    var balance = customers.OrderByDescending(c => c.Balance).ToList();
-                    Console.WriteLine(balance);
-                }
+                var customer = customers.OrderByDescending(c => c.Id)
+                    .ThenBy(c=>c.Name)
+                    .ThenBy(c=>c.RegistrationDate)
+                    .ThenBy(c=>c.Balance).ToList();
+                Console.WriteLine(customer);
             }
         }
           
