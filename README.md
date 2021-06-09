@@ -1,2 +1,2 @@
 # Homework-KateNetrebich
-![DatabaseDiagram](DatabaseDiagram.png)
+![EducationPortalDataBaseDiagram](EducationPortalDataBaseDiagram.png)
