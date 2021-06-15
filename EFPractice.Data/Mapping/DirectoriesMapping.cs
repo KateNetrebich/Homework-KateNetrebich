@@ -4,14 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EFPractice.Data.Mapping
 {
-    public class DirectoriesMapping : IEntityTypeConfiguration<Directories>
+    public class DirectoriesMapping : IEntityTypeConfiguration<Directory>
     {
-        public void Configure(EntityTypeBuilder<Directories> builder)
+        public void Configure(EntityTypeBuilder<Directory> builder)
         {
             builder.ToTable("Directories", "sch");
-            builder.HasKey(x => x.Id).HasName("PK_DirectoriesId").IsClustered();
-
-            builder.HasAlternateKey(x => x.ParentDirectoryId).HasName("AK_DirectoriesParentId");
+            builder.HasKey(x => x.Id).HasName("PK_DirectoryId").IsClustered();
 
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
@@ -21,10 +19,10 @@ namespace EFPractice.Data.Mapping
                 .HasColumnName("Title");
 
             builder.HasData(
-               new Directories[]
+               new Directory[]
                {
-                    new Directories {Id=1, ParentDirectoryId = 1, Title = "D" },
-                    new Directories {Id=2, ParentDirectoryId = 2, Title = "C" }
+                    new Directory {Id=1, ParentDirectoryId = 1, Title = "D" },
+                    new Directory {Id=2, ParentDirectoryId = 2, Title = "C" }
                });
         }
     }

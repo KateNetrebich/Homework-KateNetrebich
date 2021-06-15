@@ -11,13 +11,12 @@ namespace EFPractice.Data.Contexts
 
         }
 
-        public DbSet<Files> Files { get; set; }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<ImageFile> ImageFiles { get; set; }
-        public DbSet<VideoFiles> VideoFiles { get; set; }
-        public DbSet<AudioFiles> AudioFiles { get; set; }
+        public DbSet<VideoFile> VideoFiles { get; set; }
+        public DbSet<AudioFile> AudioFiles { get; set; }
         public DbSet<TextFile> TextFiles { get; set; }
-        public DbSet<Directories> Directories { get; set; }
+        public DbSet<Directory> Directories { get; set; }
         public DbSet<DirectoryPermission> DirectoryPermissions { get; set; }
         public DbSet<FilePermission> FilePermissions { get; set; }
 
@@ -28,27 +27,13 @@ namespace EFPractice.Data.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=LAPTOP-IO7I9C50;Database=EFPracticeDb;Trusted_Connection=True;");
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("sch");
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-            modelBuilder.Entity<DirectoryPermission>().HasData(
-                new DirectoryPermission[]
-                {
-                    new DirectoryPermission { DirectoryId = 1, UserId = 1, CanRead = true, CanWrite = true },
-                    new DirectoryPermission { DirectoryId = 2, UserId = 2, CanRead = true, CanWrite = false }
-                });
-
-            modelBuilder.Entity<FilePermission>().HasData(
-                new FilePermission[]
-                {
-                    new FilePermission { FileId = 1, UserId = 1, CanRead = true, CanWrite = false },
-                    new FilePermission { FileId = 2, UserId = 2, CanRead = true, CanWrite = true }
-                });
         }
 
     }

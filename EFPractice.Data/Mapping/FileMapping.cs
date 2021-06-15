@@ -4,21 +4,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EFPractice.Data.Mapping
 {
-    public class FileMapping : IEntityTypeConfiguration<Files>
+    public class FileMapping : IEntityTypeConfiguration<File>
     {
-        public void Configure(EntityTypeBuilder<Files> builder)
+        public void Configure(EntityTypeBuilder<File> builder)
         {
             builder.ToTable("Files", "sch");
 
             builder.HasKey(x => x.Id)
-                .HasName("PK_Files")
                 .IsClustered();
 
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
             builder.Property(x => x.Title)
                 .HasMaxLength(128)
-                .IsRequired()
+                .IsUnicode()
                 .HasColumnName("Title");
 
             builder.Property(x => x.Extension)
@@ -26,16 +25,12 @@ namespace EFPractice.Data.Mapping
                 .IsUnicode()
                 .HasColumnName("Extention"); ;
 
-            builder.HasAlternateKey(x => x.DirectoryId)
-                .HasName("FK_DirectoriesID");
+            builder.HasOne(x => x.Directory)
+                .WithMany()
+                .HasForeignKey(x => x.DirectoryId)
+                .HasConstraintName("FK_Files_Directories_DirectoryId")
+                .IsRequired();
 
-            builder.HasData(
-                new Files[]
-                {
-                    new Files {Id=1, Extension = ".png", DirectoryId = 1, Title = "Image" },
-                    new Files {Id=2, Extension = ".pdf", DirectoryId = 2, Title = "Book" }
-                });
         }
-
     }
 }

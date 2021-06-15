@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EFPractice.Data.Mapping
 {
-    public class UsersMapping : IEntityTypeConfiguration<Users>
+    public class UsersMapping : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Users> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("Users", "sch");
 
@@ -32,10 +32,10 @@ namespace EFPractice.Data.Mapping
                 .HasColumnName("PasswordHash");
 
             builder.HasData(
-                new Users[]
+                new User[]
                 {
-                    new Users {Id=1, Name = "User1", PasswordHash = "$2a$11$3hhRIl5fwk0D0P5gb8mBhOGOjMbM.YT4RqbA64dPwd6ps5rBCzuYS",Email = "newEmail1@gmail.com" },
-                    new Users {Id=2, Name = "User2", PasswordHash = "$2a$11$3hhRIl5fwk0D0P5gb8mBhOGOjMbM.YT4RqbA64dPwd6ps5rBCzuYS", Email = "newEmail2@gmail.com" }
+                    new User {Id=1, Name = "User1", PasswordHash = "$2a$11$3hhRIl5fwk0D0P5gb8mBhOGOjMbM.YT4RqbA64dPwd6ps5rBCzuYS",Email = "newEmail1@gmail.com" },
+                    new User {Id=2, Name = "User2", PasswordHash = "$2a$11$3hhRIl5fwk0D0P5gb8mBhOGOjMbM.YT4RqbA64dPwd6ps5rBCzuYS", Email = "newEmail2@gmail.com" }
                 });
         }
     }

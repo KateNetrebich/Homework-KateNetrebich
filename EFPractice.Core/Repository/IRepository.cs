@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using EFPractice.Core.Entities;
+using EFPractice.Core.Specification;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EFPractice.Core.Repository
 {
-    public interface IRepository<TEntity, TKey>
+    public interface IRepository<TEntity> where TEntity : Entity
     {
-        void Create(TEntity entity, TKey key);
-        void Delete(TKey key);
-        TEntity Get(TKey key);
-        List<TEntity> List();
-        void Update(TKey key, TEntity entity);
+        Task<TEntity> FindAsync(int id);
+        Task <IEnumerable<TEntity>> GetAsync(Specification<TEntity> specification);
+        Task DeleteAsync(TEntity entity);
+        Task UpdateAsync(TEntity entity);
     }
 }
