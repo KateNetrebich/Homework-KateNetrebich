@@ -14,6 +14,12 @@ namespace EFPractice.Data.Mapping
                 .HasMaxLength(128)
                 .IsUnicode()
                 .HasColumnName("Duration");
+
+            builder.HasOne(x => x.Directory)
+                .WithMany()
+                .HasForeignKey(x => x.DirectoryId)
+                .HasConstraintName("FK_AudioFiles_Directories_DirectoryId");
+
             builder.HasData(
                 new AudioFile[]
                 {

@@ -10,6 +10,11 @@ namespace EFPractice.Data.Mapping
         {
             builder.ToTable("ImageFile", "sch");
 
+            builder.HasOne(x => x.Directory)
+                .WithMany()
+                .HasForeignKey(x => x.DirectoryId)
+                .HasConstraintName("FK_ImageFiles_Directories_DirectoryId");
+
             builder.HasData(
                 new ImageFile[]
                 {

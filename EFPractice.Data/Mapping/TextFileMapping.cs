@@ -15,6 +15,11 @@ namespace EFPractice.Data.Mapping
                .IsUnicode()
                .HasColumnName("Content");
 
+            builder.HasOne(x => x.Directory)
+                .WithMany()
+                .HasForeignKey(x => x.DirectoryId)
+                .HasConstraintName("FK_TextFiles_Directories_DirectoryId");
+
             builder.HasData(
                new TextFile[]
                {

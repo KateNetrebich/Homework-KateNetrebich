@@ -15,6 +15,11 @@ namespace EFPractice.Data.Mapping
                 .IsUnicode()
                 .HasColumnName("Duration");
 
+            builder.HasOne(x => x.Directory)
+                .WithMany()
+                .HasForeignKey(x => x.DirectoryId)
+                .HasConstraintName("FK_VideoFiles_Directories_DirectoryId");
+
             builder.HasData(
                 new VideoFile[]
                 {

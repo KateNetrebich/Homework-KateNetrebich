@@ -23,13 +23,12 @@ namespace EFPractice.Data.Mapping
             builder.Property(x => x.Extension)
                 .HasMaxLength(128)
                 .IsUnicode()
-                .HasColumnName("Extention"); ;
+                .HasColumnName("Extention");
 
             builder.HasOne(x => x.Directory)
                 .WithMany()
                 .HasForeignKey(x => x.DirectoryId)
-                .HasConstraintName("FK_Files_Directories_DirectoryId")
-                .IsRequired();
+                .HasConstraintName("FK_Files_Directories_DirectoryId");
 
         }
     }

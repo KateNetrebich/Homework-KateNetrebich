@@ -6,7 +6,7 @@ namespace EFPractice.Core.Entities
     {
         public string Title { get; set; }
         public string Extension { get; set; }
-        public int DirectoryId { get; set; }
+        public int? DirectoryId { get; set; }
 
         public Directory Directory { get; set; }
     }
