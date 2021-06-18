@@ -1,0 +1,11 @@
+.text{
+    width: 50%;
+}
+.first{
+    float:left; 
+    margin: 7px 7px 7px 0; 
+}
+.second{
+    float:right;
+    margin: 7px 0 7px 7px; ;
+}
