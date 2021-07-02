@@ -6,17 +6,13 @@
  </head>
  <body>
     <script type="text/javascript">
-    function checkDate(year, month, day) 
-    {
-        const start = new Date();
-        for(let i = 2014; i <= 2050; i ++) 
-        {
-            start.setFullYear(i, 1, 0);
-            if(start.getDay() == 0)
-            { 
-                document.write(start.getYear());
-            }
-        }   
+    let dataStart = new Date();
+    for(let i = 2014; i <= 2050; i ++) {
+    dataStart.setFullYear(i, 0, 1);
+    if (dataStart.getDay() === 0) {
+        document.write(dataStart.getFullYear());
     }
+}
     </script>
+    </body>
 </html>
