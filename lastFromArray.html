@@ -1,0 +1,16 @@
+<!DOCTYPE html> 
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Task7</title>
+ </head>
+ <body>
+    <script type="text/javascript">
+    function getItems(arr, value = 1){
+    if (value > arr.length) value = arr.length;
+    return arr.splice(arr.length - value);
+    }
+    document.write(getItems([1,4,2,-11]));
+    </script>
+    </body>
+</html>

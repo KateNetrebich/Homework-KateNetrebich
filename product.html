@@ -1,0 +1,21 @@
+<!DOCTYPE html> 
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Task7</title>
+ </head>
+ <body>
+    <script type="text/javascript">
+    function maxNum(arr){
+    let max = arr[0] * arr[1];
+    for (let i = 1; i < arr.length - 1; i++) {
+        if (max < arr[i] * arr[i+1]) {
+            max = arr[i] * arr[i+1];
+        }
+    }
+    return max;
+    }
+    document.write(maxNum([3 , 6 , -2 , -5 , 7 , 3]));
+    </script>
+    </body>
+</html>
