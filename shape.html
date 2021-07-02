@@ -1,0 +1,33 @@
+<!DOCTYPE html> 
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Task1</title>
+ </head>
+ <body>
+    <script type="text/javascript">
+    class Shape{
+        constructor()
+        {
+            this.width = 0;
+            this.height = 0;
+        }
+        countArea(width, height){
+            this.area = width * height;
+            document.write(`Area = ${this.area}`)
+        }
+    }
+    class Square extends Shape{
+    }
+
+    class Circle extends Shape{
+    }
+
+    let square = new Square();
+    let circle = new Circle();
+
+    square.countArea(5,5);
+    circle.countArea(10, 10);
+    </script>
+    </body>
+</html>
