@@ -1,0 +1,46 @@
+<!DOCTYPE html> 
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Education Portal</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+ </head>
+ <body id="page">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+       
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a style="font-size: 18px;" class="nav-item nav-link" href="index.html">Registration</a>
+                </li>
+                <li class="nav-item">
+                    <a style="font-size: 18px;" class="nav-item nav-link" href="signIn.html">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a style="font-size: 18px;" class="nav-link" href="createCourses.html">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a style="font-size: 18px;" class="nav-link" href="userProfile.html">User Profile</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div>
+        <h2>Book Material</h2>
+        <hr>
+        <h3>Create Book Material</h3>
+        <label for="name"><b>Name</b></label>
+        <input Id="name" type="text" placeholder="Enter book name" name="name" required>
+        <label for="description"><b>Description</b></label>
+        <input Id="description" type="text" placeholder="Enter book description" name="description" required>
+        <label for="author"><b>Author</b></label>
+        <input Id="author" type="text" placeholder="Enter author" name="author" required>
+        <label for="pagenumber"><b>Page number</b></label>
+        <input Id="pagenumber" type="number" placeholder="Enter page number" name="pagenumber" required>
+        <label for="date"><b>Date of publication</b></label>
+        <input Id="date" type="date" name="date" required>
+        
+        <button id = "btn" type="submit" class="createBtn">Add book to course</button>  
+  </div>
+ </body>
+</html>
